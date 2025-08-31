@@ -20,7 +20,7 @@ CREATE TABLE properties (
     address VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
-    pricepernight DECIMAL(10,2) NOT NULL CHECK (price_per_night >= 0),
+    pricepernight DECIMAL(10,2) NOT NULL CHECK (pricepernight >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_property_host FOREIGN KEY (host_id) REFERENCES users(user_id) ON DELETE CASCADE
