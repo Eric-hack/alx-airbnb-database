@@ -105,61 +105,64 @@ This document defines the entities, attributes, and relationships for the **Airb
 
 **File Location:** `alx-airbnb-database/ERD/requirements.md`
 
-## Diagram (Mermaid)
-
 ```mermaid
 erDiagram
   USER {
-    UUID user_id PK
-    VARCHAR first_name
-    VARCHAR last_name
-    VARCHAR email UNIQUE
-    VARCHAR password_hash
-    VARCHAR phone_number
-    ENUM role
-    TIMESTAMP created_at
+    int user_id PK
+    string first_name
+    string last_name
+    string email
+    string password_hash
+    string phone_number
+    string role
+    date created_at
   }
+
   PROPERTY {
-    UUID property_id PK
-    UUID host_id FK
-    VARCHAR name
-    TEXT description
-    VARCHAR location
-    DECIMAL pricepernight
-    TIMESTAMP created_at
-    TIMESTAMP updated_at
+    int property_id PK
+    int host_id FK
+    string name
+    string description
+    string location
+    float price_per_night
+    date created_at
+    date updated_at
   }
+
   BOOKING {
-    UUID booking_id PK
-    UUID property_id FK
-    UUID user_id FK
-    DATE start_date
-    DATE end_date
-    DECIMAL total_price
-    ENUM status
-    TIMESTAMP created_at
+    int booking_id PK
+    int property_id FK
+    int user_id FK
+    date start_date
+    date end_date
+    float total_price
+    string status
+    date created_at
   }
+
   PAYMENT {
-    UUID payment_id PK
-    UUID booking_id FK
-    DECIMAL amount
-    TIMESTAMP payment_date
-    ENUM payment_method
+    int payment_id PK
+    int booking_id FK
+    float amount
+    date payment_date
+    string payment_method
   }
+
   REVIEW {
-    UUID review_id PK
-    UUID property_id FK
-    UUID user_id FK
-    INTEGER rating
-    TEXT comment
-    TIMESTAMP created_at
+    int review_id PK
+    int property_id FK
+    int user_id FK
+    int rating
+    string comment
+    date created_at
   }
+
   MESSAGE {
-    UUID message_id PK
-    UUID sender_id FK
-    UUID recipient_id FK
-    TEXT message_body
-    TIMESTAMP sent_at
+    int message_id PK
+    int sender_id FK
+    int recipient_id FK
+    string message_body
+    date sent_at
   }
 
   USER ||--o{ PROPERTY : hosts
