@@ -123,8 +123,10 @@ erDiagram
     int host_id FK
     string name
     string description
-    string location
-    float price_per_night
+    string address
+    string city
+    string country
+    float pricepernight
     date created_at
     date updated_at
   }
