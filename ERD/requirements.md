@@ -105,70 +105,48 @@ This document defines the entities, attributes, and relationships for the **Airb
 
 **File Location:** `alx-airbnb-database/ERD/requirements.md`
 
-## Diagram (Mermaid)
-
 ```mermaid
 erDiagram
-  USER {
-    UUID user_id PK
-    VARCHAR first_name
-    VARCHAR last_name
-    VARCHAR email UNIQUE
-    VARCHAR password_hash
-    VARCHAR phone_number
-    ENUM role
-    TIMESTAMP created_at
-  }
-  PROPERTY {
-    UUID property_id PK
-    UUID host_id FK
-    VARCHAR name
-    TEXT description
-    VARCHAR address
-    VARCHAR city
-    VARCHAR country
-    DECIMAL pricepernight
-    TIMESTAMP created_at
-    TIMESTAMP updated_at
-  }
-  BOOKING {
-    UUID booking_id PK
-    UUID property_id FK
-    UUID user_id FK
-    DATE start_date
-    DATE end_date
-    DECIMAL total_price
-    ENUM status
-    TIMESTAMP created_at
-  }
-  PAYMENT {
-    UUID payment_id PK
-    UUID booking_id FK
-    DECIMAL amount
-    TIMESTAMP payment_date
-    ENUM payment_method
-  }
-  REVIEW {
-    UUID review_id PK
-    UUID property_id FK
-    UUID user_id FK
-    INTEGER rating
-    TEXT comment
-    TIMESTAMP created_at
-  }
-  MESSAGE {
-    UUID message_id PK
-    UUID sender_id FK
-    UUID recipient_id FK
-    TEXT message_body
-    TIMESTAMP sent_at
-  }
+    USER {
+        int id PK
+        string name
+        string email
+        string password
+        datetime created_at
+    }
 
-  USER ||--o{ PROPERTY : hosts
-  USER ||--o{ BOOKING  : makes
-  PROPERTY ||--o{ BOOKING : has
-  BOOKING ||--o{ PAYMENT : pays
-  PROPERTY ||--o{ REVIEW : has
-  USER ||--o{ REVIEW : writes
-  USER ||--o{ MESSAGE : sends
-  MESSAGE }o--|| USER : receives
+    PROPERTY {
+        int id PK
+        int owner_id FK
+        string title
+        string description
+        string location
+        decimal price
+        datetime created_at
+    }
+
+    BOOKING {
+        int id PK
+        int user_id FK
+        int property_id FK
+        datetime start_date
+        datetime end_date
+        decimal total_price
+        datetime created_at
+    }
+
+    REVIEW {
+        int id PK
+        int booking_id FK
+        int user_id FK
+        int property_id FK
+        int rating
+        string comment
+        datetime created_at
+    }
+
+    USER ||--o{ BOOKING : "makes"
+    PROPERTY ||--o{ BOOKING : "has"
+    BOOKING ||--o{ REVIEW : "receives"
+    USER ||--o{ REVIEW : "writes"
+    PROPERTY ||--o{ REVIEW : "gets"
