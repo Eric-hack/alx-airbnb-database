@@ -107,46 +107,69 @@ This document defines the entities, attributes, and relationships for the **Airb
 
 ```mermaid
 erDiagram
-    USER {
-        int id PK
-        string name
-        string email
-        string password
-        datetime created_at
-    }
+  USER {
+    int user_id PK
+    string first_name
+    string last_name
+    string email
+    string password_hash
+    string phone_number
+    string role
+    date created_at
+  }
 
-    PROPERTY {
-        int id PK
-        int owner_id FK
-        string title
-        string description
-        string location
-        decimal price
-        datetime created_at
-    }
+  PROPERTY {
+    int property_id PK
+    int host_id FK
+    string name
+    string description
+    string location
+    float price_per_night
+    date created_at
+    date updated_at
+  }
 
-    BOOKING {
-        int id PK
-        int user_id FK
-        int property_id FK
-        datetime start_date
-        datetime end_date
-        decimal total_price
-        datetime created_at
-    }
+  BOOKING {
+    int booking_id PK
+    int property_id FK
+    int user_id FK
+    date start_date
+    date end_date
+    float total_price
+    string status
+    date created_at
+  }
 
-    REVIEW {
-        int id PK
-        int booking_id FK
-        int user_id FK
-        int property_id FK
-        int rating
-        string comment
-        datetime created_at
-    }
+  PAYMENT {
+    int payment_id PK
+    int booking_id FK
+    float amount
+    date payment_date
+    string payment_method
+  }
 
-    USER ||--o{ BOOKING : "makes"
-    PROPERTY ||--o{ BOOKING : "has"
-    BOOKING ||--o{ REVIEW : "receives"
-    USER ||--o{ REVIEW : "writes"
-    PROPERTY ||--o{ REVIEW : "gets"
+  REVIEW {
+    int review_id PK
+    int property_id FK
+    int user_id FK
+    int rating
+    string comment
+    date created_at
+  }
+
+  MESSAGE {
+    int message_id PK
+    int sender_id FK
+    int recipient_id FK
+    string message_body
+    date sent_at
+  }
+
+  USER ||--o{ PROPERTY : hosts
+  USER ||--o{ BOOKING  : makes
+  PROPERTY ||--o{ BOOKING : has
+  BOOKING ||--o{ PAYMENT : pays
+  PROPERTY ||--o{ REVIEW : has
+  USER ||--o{ REVIEW : writes
+  USER ||--o{ MESSAGE : sends
+  MESSAGE }o--|| USER : receives
