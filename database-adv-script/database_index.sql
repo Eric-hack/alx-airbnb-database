@@ -12,3 +12,23 @@ CREATE INDEX idx_bookings_date ON bookings(booking_date);
 -- Index on Properties table (commonly searched by location or id)
 CREATE INDEX idx_properties_location ON properties(location);
 CREATE INDEX idx_properties_id ON properties(id);
+
+-- ===========================
+-- Performance Testing Queries
+-- ===========================
+
+-- Query BEFORE indexes (run this first without indexes created)
+-- EXPLAIN ANALYZE
+-- SELECT u.name, COUNT(b.id) AS total_bookings
+-- FROM users u
+-- JOIN bookings b ON u.id = b.user_id
+-- WHERE u.email = 'john.doe@example.com'
+-- GROUP BY u.name;
+
+-- Query AFTER indexes (run this again after creating indexes)
+EXPLAIN ANALYZE
+SELECT u.name, COUNT(b.id) AS total_bookings
+FROM users u
+JOIN bookings b ON u.id = b.user_id
+WHERE u.email = 'john.doe@example.com'
+GROUP BY u.name;
