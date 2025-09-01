@@ -30,7 +30,8 @@ SELECT
     r.comment,
     r.created_at AS review_date
 FROM properties p
-LEFT JOIN reviews r ON p.property_id = r.property_id;
+LEFT JOIN reviews r ON p.property_id = r.property_id
+ORDER BY property_id;
 
 
 -- ===============================================
