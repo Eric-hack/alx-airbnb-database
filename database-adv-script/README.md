@@ -7,6 +7,7 @@ The queries demonstrate the use of `INNER JOIN`, `LEFT JOIN`, and `FULL OUTER JO
 
 ##  Files
 - **joins_queries.sql** → Contains the SQL queries for joins.
+- **subqueries.sql** → Contains SQL queries demonstrating subqueries.  
 - **README.md** → Documentation explaining the queries.
 
 ---
@@ -26,5 +27,7 @@ The Airbnb database has the following key tables with sample data:
 ### 1. INNER JOIN – Retrieve all bookings and the respective users who made those bookings
 ### 2. LEFT JOIN – Retrieve all properties and their reviews (including properties without reviews)
 ### 3. FULL OUTER JOIN – Retrieve all users and all bookings
+### 4. Non-Correlated Subquery - Finds all properties where the average rating is greater than 4.0
+### 5. Correlated Subquery - Find users who have made more than 3 bookings
 
 
